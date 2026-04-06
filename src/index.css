@@ -202,3 +202,48 @@ a, button, input, select, textarea {
   50% { transform: translate(50px, 80px) scale(1.1); }
   100% { transform: translate(-30px, 30px) scale(0.9); }
 }
+
+/* ── Responsive Utilities ────────────────────────────────────── */
+.grid-responsive-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 1024px) {
+  .grid-responsive-2 { grid-template-columns: 1fr 2fr; }
+}
+
+.grid-responsive-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 1024px) {
+  .grid-responsive-3 { grid-template-columns: 2fr 1fr; }
+}
+
+.flex-column-mobile {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .flex-column-mobile { flex-direction: row; }
+}
+
+.table-responsive-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+.table-responsive-wrapper table {
+  min-width: 600px;
+}
+
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 35;
+  backdrop-filter: blur(2px);
+}
+

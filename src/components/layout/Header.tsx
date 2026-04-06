@@ -3,8 +3,8 @@
 // ═══════════════════════════════════════════════════════════════════
 
 import { useState } from 'react';
-import { Sun, Moon, Plus, Shield, Eye, Scan } from 'lucide-react';
-import { useTheme, useAddTransaction } from '../../hooks';
+import { Sun, Moon, Plus, Shield, Eye, Scan, Menu } from 'lucide-react';
+import { useTheme, useAddTransaction, useIsMobile } from '../../hooks';
 import { useFinanceStore } from '../../store/financeStore';
 import { ReceiptScannerModal } from '../../features/transactions/ReceiptScannerModal';
 import toast from 'react-hot-toast';
@@ -19,37 +19,48 @@ export function Header({ title, subtitle, onAddTransaction }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const userRole = useFinanceStore(s => s.userRole);
   const setUserRole = useFinanceStore(s => s.setUserRole);
+  const toggleSidebar = useFinanceStore(s => s.toggleSidebar);
   const [scanOpen, setScanOpen] = useState(false);
   const addMutation = useAddTransaction();
+  const isMobile = useIsMobile();
 
   return (
     <header style={{
-      padding: '20px 32px',
+      padding: isMobile ? '16px' : '20px 32px',
       display: 'flex',
-      alignItems: 'center',
+      flexDirection: isMobile ? 'column' : 'row',
+      alignItems: isMobile ? 'flex-start' : 'center',
       justifyContent: 'space-between',
       borderBottom: '1px solid var(--border-color)',
       background: 'var(--bg-primary)',
+      gap: isMobile ? 16 : 0,
       position: 'sticky',
       top: 0,
       zIndex: 30,
     }}>
-      <div>
-        <h1 style={{
-          fontSize: 24, fontWeight: 700,
-          color: 'var(--text-primary)',
-          letterSpacing: '-0.02em',
-        }}>
-          {title}
-        </h1>
-        {subtitle && (
-          <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginTop: 2 }}>
-            {subtitle}
-          </p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, width: isMobile ? '100%' : 'auto' }}>
+        {isMobile && (
+          <button onClick={toggleSidebar} style={{ background: 'none', border: 'none', color: 'var(--text-primary)', display: 'flex', padding: 4 }}>
+            <Menu size={24} />
+          </button>
         )}
+        <div>
+          <h1 style={{
+            fontSize: isMobile ? 22 : 24, fontWeight: 700,
+            color: 'var(--text-primary)',
+            letterSpacing: '-0.02em',
+          }}>
+            {title}
+          </h1>
+          {subtitle && (
+            <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2 }}>
+              {subtitle}
+            </p>
+          )}
+        </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', width: isMobile ? '100%' : 'auto' }}>
         {/* Role Switcher */}
         <div style={{
           display: 'flex', background: 'var(--bg-card)', borderRadius: 10,

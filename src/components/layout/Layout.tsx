@@ -4,6 +4,8 @@
 
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
+import { useFinanceStore } from '../../store/financeStore';
+import { useIsMobile } from '../../hooks';
 
 function AmbientBackground() {
   return (
@@ -16,9 +18,16 @@ function AmbientBackground() {
 }
 
 export function Layout() {
+  const isMobile = useIsMobile();
+  const collapsed = useFinanceStore(s => s.sidebarCollapsed);
+  const toggle = useFinanceStore(s => s.toggleSidebar);
+
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', width: '100%', position: 'relative' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', width: '100%', position: 'relative', overflowX: 'hidden' }}>
       <AmbientBackground />
+      {isMobile && !collapsed && (
+        <div className="mobile-overlay" onClick={toggle} />
+      )}
       <Sidebar />
       <main style={{
         flex: 1,
@@ -27,6 +36,7 @@ export function Layout() {
         minHeight: '100vh',
         position: 'relative',
         zIndex: 1,
+        width: isMobile ? '100%' : 'calc(100% - 240px)'
       }}>
         <Outlet />
       </main>

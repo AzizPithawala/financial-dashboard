@@ -45,7 +45,7 @@ export function DashboardPage() {
         ) : (
           <>
             <SummaryCards summary={summary} isLoading={sumLoading} trendData={trend} />
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16 }}>
+            <div className="grid-responsive-2">
               <TrendChart data={trend ?? []} isLoading={trendLoading} />
               <CategoryDonut data={categories ?? []} isLoading={catLoading} />
             </div>

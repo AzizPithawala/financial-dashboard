@@ -17,11 +17,11 @@ export function InsightsPage() {
       <Header title="Insights" subtitle="Understand your financial patterns" />
       <div style={{ padding: '24px 32px' }}>
         <SmartBanners summary={summary} />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 16, marginBottom: 16 }}>
+        <div className="grid-responsive-2" style={{ marginBottom: 16 }}>
           <HealthScoreRing score={summary?.score ?? 0} isLoading={sumLoading} />
           <MonthlyTrendAreaChart data={trend ?? []} isLoading={trendLoading} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16 }}>
+        <div className="grid-responsive-3">
           <CategoryBreakdown data={categories ?? []} isLoading={catLoading} />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <MonthOverMonthVariance data={rawData} isLoading={txLoading} />

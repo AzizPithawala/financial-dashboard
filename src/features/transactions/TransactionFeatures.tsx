@@ -183,7 +183,8 @@ export function TransactionTable({ data, isLoading, onDelete, densityMode }: Tra
   }
 
   return (
-    <div className="card" style={{ overflow: 'hidden' }}>
+    <div className="card" style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+      <div style={{ minWidth: 600 }}>
       {/* Header */}
       <div style={{
         display: 'grid',
@@ -273,6 +274,7 @@ export function TransactionTable({ data, isLoading, onDelete, densityMode }: Tra
           </motion.div>
         ))}
       </AnimatePresence>
+      </div>
     </div>
   );
 }

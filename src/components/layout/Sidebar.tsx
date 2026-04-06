@@ -5,6 +5,7 @@
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, ArrowLeftRight, TrendingUp, Settings, ChevronLeft, Zap, CalendarDays } from 'lucide-react';
 import { useFinanceStore } from '../../store/financeStore';
+import { useIsMobile } from '../../hooks';
 
 const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
@@ -17,17 +18,20 @@ const navItems = [
 export function Sidebar() {
   const collapsed = useFinanceStore(s => s.sidebarCollapsed);
   const toggle = useFinanceStore(s => s.toggleSidebar);
+  const isMobile = useIsMobile();
 
   return (
     <aside
       style={{
-        width: collapsed ? 68 : 240,
+        width: isMobile ? 240 : (collapsed ? 68 : 240),
         minHeight: '100vh',
+        height: '100%',
         background: 'var(--bg-sidebar)',
         display: 'flex',
         flexDirection: 'column',
-        transition: 'width 200ms ease',
-        position: 'relative',
+        transition: 'all 250ms ease-in-out',
+        position: isMobile ? 'fixed' : 'relative',
+        left: isMobile ? (collapsed ? '-240px' : '0') : '0',
         zIndex: 40,
       }}
     >
@@ -121,7 +125,7 @@ export function Sidebar() {
         <ChevronLeft
           size={20}
           style={{
-            transform: collapsed ? 'rotate(180deg)' : 'none',
+            transform: isMobile ? 'rotate(180deg)' : (collapsed ? 'rotate(180deg)' : 'none'),
             transition: 'transform 200ms ease',
           }}
         />
