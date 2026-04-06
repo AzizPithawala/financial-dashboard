@@ -2,7 +2,7 @@
 
 A premium, interactive personal finance dashboard built to evaluate frontend development capabilities. FINOVA is designed to help users track their cash flow, examine detailed transactions, and get actionable insights.
 
-![Dashboard Preview](https://via.placeholder.com/1200x600.png?text=Finova+Financial+Dashboard)
+![Dashboard Preview](public/DashboardPreview.png)
 
 ## 🎯 Project Objective
 This application satisfies the **Finance Dashboard UI Assignment** criteria. It demonstrates my ability to craft complex user interfaces, manage complex local state, establish basic role-based access control (RBAC), and integrate interactive data visualizations. 
